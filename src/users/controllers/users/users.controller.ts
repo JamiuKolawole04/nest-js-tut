@@ -15,17 +15,15 @@ import {
 import { Request, Response } from 'express';
 
 import { CreateUserDto } from 'src/users/dtos/createUsers.dto';
+import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private userService: UsersService) {}
+
   @Get()
   getUsers() {
-    return [
-      {
-        username: 'anson',
-        gmail: 'anson@gmail.com',
-      },
-    ];
+    return this.userService.fetchUsers();
   }
 
   @Get('posts')
@@ -57,7 +55,7 @@ export class UsersController {
   @UsePipes(new ValidationPipe())
   createUer(@Body() userData: CreateUserDto) {
     console.log(userData);
-    return userData;
+    return this.userService.createUser(userData);
   }
 
   //   @Get(':id')
