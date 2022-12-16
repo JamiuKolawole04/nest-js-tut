@@ -9,9 +9,10 @@ import { UsersController } from './controllers/users/users.controller';
 import { UsersService } from './services/users/users.service';
 import { ExampleMiddleware } from './middlewares/example/example.middleware';
 import { AnotherMiddleware } from './middlewares/another/another.middleware';
+import { AuthController } from './controllers/auth/auth.controller';
 
 @Module({
-  controllers: [UsersController],
+  controllers: [UsersController, AuthController],
   providers: [UsersService],
 })
 export class UsersModule implements NestModule {
